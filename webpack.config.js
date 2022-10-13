@@ -10,7 +10,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: `Mike's Cereal Shack`,
+      title: `Taskmaster`,
     }),
   ],
   optimization: {

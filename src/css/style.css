@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo&display=swap');
+
+:root {
+    --offWhite: #e7ecef;
+    --darkBlue: #274c77;
+    --blue: #6096ba;
+    --lightBlue: #a3cef1;
+    --gray: #8b8c89;
+    --halfBlack: rgba(0, 0, 0, 0.5)
+}
+
+.bodyContainer {
+    min-height: 100vh;
+    background-color: var(--offWhite);
+    display: grid;
+    grid:
+        "header header" 50px
+        "sidebar mainContent" 1fr
+        / 1fr 4fr;
+    font-family: 'Heebo', sans-serif;
+}
+
+.header {
+    grid-area: header;
+    z-index: 60;
+    background-color: var(--blue);
+    box-shadow: 0px 2px 2px 2px var(--halfBlack);
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    z-index: 50;
+    background-color: var(--lightBlue);
+    box-shadow: 3px 0 3px 3px var(--halfBlack);
+}
+
+.mainContent {
+    grid-area: mainContent;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 4fr;
+}
+
+.addTaskForm {
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    padding: 10px;
+    gap: 10px;
+}
+
+.addTaskForm input {
+    font-size: 1.2rem;
+    border-radius: 10px;
+}
+
+.inputCoupleDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.addTaskButton {
+    cursor: pointer;
+    align-self: center;
+    background-color: var(--darkBlue);
+    color: white;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 12rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.addTaskButton:hover {
+    transition: all 0.3s;
+    scale: 1.2 1.2;
+}
+
+.taskListDiv {
+    display: grid;
+}
+
+.taskListTitleRowDiv, .taskDiv {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr 4fr;
+}
