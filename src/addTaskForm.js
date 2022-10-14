@@ -1,6 +1,7 @@
 import createEl from './utilities.js';
 import { addTask } from './taskLogic.js'
-import openAddTaskFormSVG from './images/icons/openAddTaskForm.svg'
+import { generateTaskFormProjectSelectionDiv } from './projects.js'
+import openAddTaskFormSVG from './images/icons/plusIcon.svg'
 import closeAddTaskFormSVG from './images/icons/closeAddTaskForm.svg'
 
 export function generateAddTaskForm() {
@@ -8,17 +9,16 @@ export function generateAddTaskForm() {
     //TODO Need to change date and priority to more accurate input types
     //TODO Need to validate - can't add something with an identical title and project
 
-
     const titleBox = createEl.input('formInput', 'text', 'taskTitleInput', 'Title');
     const dateBox = createEl.input('formInput', 'date', 'taskDateInput', 'Date');
     const descriptionBox = createEl.input('formInput', 'text', 'taskDescriptionInput', 'Description');
     const priorityBox = createEl.input('formInput', 'text', 'taskPriorityInput', 'Priority');
-    const projectBox = createEl.input('formInput', 'text', 'taskProjectInput', 'Project');
+    const projectDiv = generateTaskFormProjectSelectionDiv();
 
     const addTaskButton = createEl.div('addTaskButton', 'Add Task')
-    addTaskButton.addEventListener('click', submitAddTaskRequest)
+        addTaskButton.addEventListener('click', submitAddTaskRequest)
 
-    const formElements = [titleBox, dateBox, descriptionBox, priorityBox, projectBox, addTaskButton];
+    const formElements = [titleBox, dateBox, descriptionBox, priorityBox, projectDiv, addTaskButton];
 
     const addTaskForm = createEl.div('addTaskForm');
     formElements.forEach(element => {
@@ -67,7 +67,6 @@ export function generateTaskFormToggle() {
 }
 
 function openAddTaskForm() {
-    console.log('opening')
     document.querySelector('.bodyContainer').appendChild(generateAddTaskForm());
     document.querySelector('.openAddTaskFormIMG').style.display = 'none';
     document.querySelector('.closeAddTaskFormIMG').style.display = 'block';
@@ -76,7 +75,6 @@ function openAddTaskForm() {
 }
 
 function closeAddTaskForm() {
-    console.log('closing');
     document.querySelector('.addTaskFormContainer').remove();
     document.querySelector('.openAddTaskFormIMG').style.display = 'block';
     document.querySelector('.closeAddTaskFormIMG').style.display = 'none';
