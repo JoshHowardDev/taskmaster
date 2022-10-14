@@ -1,9 +1,11 @@
 import createEl from './utilities.js';
 import {formatRelative, parseISO, compareAsc} from 'date-fns';
+import deleteIcon from './images/icons/deleteIcon.svg'
+import editIcon from './images/icons/editIcon.svg'
 
 export function publishTaskList(taskList) {
 
-    const taskListTitleRow = ['Date', 'Title', 'Project'];
+    const taskListTitleRow = ['Date', 'Title', 'Project', ''];
 
     //Create a new, empty taskListDiv
     let taskListDiv = createEl.div('taskListDiv');
@@ -24,12 +26,12 @@ export function publishTaskList(taskList) {
     Object.values(taskList).forEach(task => {
 
         const taskDiv = createEl.div('taskDiv');        
-        if (dateFuncs.pastDueBool(task.date)) taskDiv.classList.add('pastDue');
-
-        taskDiv.setAttribute('data-taskId', task.id);
-        taskDiv.appendChild(createEl.div('taskDateDiv', dateFuncs.getRelativeDateString(task.date)));
-        taskDiv.appendChild(createEl.div('taskTitleDiv', task.title));
-        taskDiv.appendChild(createEl.div('taskProjectDiv', task.project));
+            if (dateFuncs.pastDueBool(task.date)) taskDiv.classList.add('pastDue');
+            taskDiv.setAttribute('data-taskId', task.id);
+            taskDiv.appendChild(createEl.div('taskDateDiv', dateFuncs.getRelativeDateString(task.date)));
+            taskDiv.appendChild(createEl.div('taskTitleDiv', task.title));
+            taskDiv.appendChild(createEl.div('taskProjectDiv', task.project));
+            taskDiv.appendChild(taskButtons.createTaskButtonDiv(task.id))
         taskListDiv.appendChild(taskDiv);
     });
 
@@ -61,3 +63,42 @@ const dateFuncs = (() => {
     return {pastDueBool, getRelativeDateString};
 
 })();
+
+const taskButtons = (() => {
+    const deleteButton = (taskId) => {
+        const deleteIconIMG = new Image();
+            deleteIconIMG.src = deleteIcon;
+            deleteIconIMG.alt = 'Delete'
+        const deleteButtonDiv = createEl.div('deleteButton')
+            deleteButtonDiv.appendChild(deleteIconIMG)
+            deleteButtonDiv.addEventListener('click', deleteAttempt.bind(this, taskId))
+        return deleteButtonDiv;
+    }
+    const editButton = (taskId) => {
+        const editIconIMG = new Image();
+            editIconIMG.src = editIcon;
+            editIconIMG.alt = 'edit'
+        const editButtonDiv = createEl.div('editButton')
+            editButtonDiv.appendChild(editIconIMG)
+            editButtonDiv.addEventListener('click', editAttempt.bind(this, taskId));
+        return editButtonDiv;
+    }
+
+    const createTaskButtonDiv = (taskId) => {
+        const taskButtonsDiv = createEl.div('taskButtonsDiv');
+            taskButtonsDiv.appendChild(editButton(taskId));    
+            taskButtonsDiv.appendChild(deleteButton(taskId));
+        return taskButtonsDiv;
+    }
+
+    return {createTaskButtonDiv};
+})();
+
+function deleteAttempt(taskId) {
+    //confirm('Are you sure you want to delete this task?');
+    alert('Task ID: ' + taskId);
+}
+
+function editAttempt(taskId) {
+    alert('Task ID: ' + taskId );
+}
