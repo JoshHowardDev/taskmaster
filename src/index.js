@@ -26,8 +26,8 @@ function generateMainContent() {
 
 function generateAddTaskForm() {
 
-    //Need to change date and priority to more accurate input types
-    //Need to validate - can't add something with an identical title and project
+    //TODO Need to change date and priority to more accurate input types
+    //TODO Need to validate - can't add something with an identical title and project
 
 
     const titleBox = createEl.input('formInput', 'text', 'taskTitleInput', 'Title');
@@ -50,8 +50,8 @@ function generateAddTaskForm() {
 
 function submitAddTaskRequest() {
 
-    //Need to check input validation
-    //Need to find a way to add more projects
+    //TODO Need to check input validation
+    //TODO Need to find a way to add more projects
     const title = document.querySelector('#taskTitleInput').value;
     const date = document.querySelector('#taskDateInput').value;
     const description = document.querySelector('#taskDescriptionInput').value;

@@ -2,6 +2,7 @@ import createEl from './utilities.js';
 import {formatRelative, parseISO, compareAsc} from 'date-fns';
 import deleteIcon from './images/icons/deleteIcon.svg'
 import editIcon from './images/icons/editIcon.svg'
+import { deleteTask } from './taskLogic.js';
 
 export function publishTaskList(taskList) {
 
@@ -95,8 +96,10 @@ const taskButtons = (() => {
 })();
 
 function deleteAttempt(taskId) {
-    //confirm('Are you sure you want to delete this task?');
-    alert('Task ID: ' + taskId);
+    //TODO Make a better looking popup than confirm
+    if (confirm('Are you sure you want to delete this task?')) {
+        deleteTask(taskId);
+    };
 }
 
 function editAttempt(taskId) {

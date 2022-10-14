@@ -18,14 +18,22 @@ class Task {
         this.priority = priority;
         this.project = project;
     };
-    delete(){
-        //TODO
-    };
     toggleComplete() {
         this.complete = !this.complete;
     };
 
 };
+
+const deleteTask = (taskId) => {
+    const taskList = getTaskList();
+    if (Object.keys(taskList).includes(taskId)) {
+        delete taskList[taskId];
+    } else {
+        console.log(`No task with ID ${taskId} within task list.`);
+        return;
+    }
+    populateTaskList(taskList);
+}
 
 const getTaskList = () => {
     if (localStorage.getItem('taskList')) {
@@ -37,6 +45,28 @@ const getTaskList = () => {
 
 function compareDate(a, b) {
     return compareAsc(parseISO(a[1]), parseISO(b[1]));
+}
+
+
+const addTask = (date, title, description, priority, project) => {
+
+    const dateForID = new Date();
+    const taskId = dateForID.getFullYear().toString() + dateForID.getMonth().toString() + dateForID.getDate().toString() + dateForID.getHours().toString() + dateForID.getMinutes().toString() + dateForID.getSeconds().toString();
+
+    let taskList = getTaskList();
+    const newTask = new Task(taskId, date, title, description, priority, project);
+    taskList[taskId] = newTask;
+
+    populateTaskList(taskList);
+}
+
+const populateTaskList = (taskList) => {
+    if (!taskList) {
+        taskList = getTaskList();
+    }
+    taskList = sortTaskList(taskList);
+    localStorage.setItem('taskList', JSON.stringify(taskList));
+    publishTaskList(getTaskList());
 }
 
 const sortTaskList = (taskList) => {
@@ -58,23 +88,5 @@ const sortTaskList = (taskList) => {
     return sortedTaskList;
 };
 
-const addTask = (date, title, description, priority, project) => {
 
-    const dateForID = new Date();
-    const taskId = dateForID.getFullYear().toString() + dateForID.getMonth().toString() + dateForID.getDate().toString() + dateForID.getHours().toString() + dateForID.getMinutes().toString() + dateForID.getSeconds().toString();
-
-    let taskList = getTaskList();
-    const newTask = new Task(taskId, date, title, description, priority, project);
-    taskList[taskId] = newTask;
-
-    taskList = sortTaskList(taskList);
-
-    localStorage.setItem('taskList', JSON.stringify(taskList));
-    populateTaskList(taskList);
-}
-
-const populateTaskList = () => {
-    publishTaskList(getTaskList());
-}
-
-export {addTask, populateTaskList};
+export {addTask, deleteTask, populateTaskList};
