@@ -27,8 +27,11 @@ function generateMainContent() {
 function generateAddTaskForm() {
 
     //Need to change date and priority to more accurate input types
+    //Need to validate - can't add something with an identical title and project
+
+
     const titleBox = createEl.input('formInput', 'text', 'taskTitleInput', 'Title');
-    const dateBox = createEl.input('formInput', 'text', 'taskDateInput', 'Date');
+    const dateBox = createEl.input('formInput', 'date', 'taskDateInput', 'Date');
     const descriptionBox = createEl.input('formInput', 'text', 'taskDescriptionInput', 'Description');
     const priorityBox = createEl.input('formInput', 'text', 'taskPriorityInput', 'Priority');
     const projectBox = createEl.input('formInput', 'text', 'taskProjectInput', 'Project');

@@ -81,12 +81,43 @@
     scale: 1.2 1.2;
 }
 
+.taskListContainer {
+    padding: 10px 40px 10px 40px;;
+}
+
 .taskListDiv {
     display: grid;
+    padding: 5px;
 }
 
 .taskListTitleRowDiv, .taskDiv {
     display: grid;
     justify-items: center;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 2fr 2fr;
+    margin: 3px;
+}
+
+.taskListTitleRowDiv {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.taskDiv {
+    border-radius: 5px;
+    box-shadow: 0 0 2px 2px var(--halfBlack);
+    padding: 20px 0 20px;
+}
+
+.taskDiv:hover {
+    transition: all 0.2s;
+    scale: 1.03 1.1;
+    outline: 1px solid gold;
+}
+
+.taskTitleDiv, .taskProjectDiv {
+    justify-self: start;
+}
+
+.pastDue {
+    background-color: rgb(255, 143, 143);
 }
