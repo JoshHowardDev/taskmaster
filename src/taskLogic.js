@@ -76,8 +76,6 @@ const sortTaskList = (taskList) => {
         keyAndDateArray.push([obj.id, obj.date])
     });
 
-    console.log(keyAndDateArray)
-
     keyAndDateArray.sort(compareDate);
 
     const sortedTaskList = {};

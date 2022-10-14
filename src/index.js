@@ -1,8 +1,8 @@
 import './css/style.css'
 import './css/meyersCSSReset.css'
 import createEl from './utilities.js';
-import { addTask, populateTaskList } from './taskLogic.js'
-import { publishTaskList } from './DOMManipulation';
+import { populateTaskList } from './taskLogic.js'
+import { generateAddTaskForm, generateTaskFormToggle } from './addTaskForm.js'
 
 function generateHeader() {
     const header = createEl.div('header');
@@ -18,49 +18,10 @@ function generateSidebar() {
 
 function generateMainContent() {
     const mainContentDiv = createEl.div('mainContent');
-    mainContentDiv.appendChild(generateAddTaskForm());
-    mainContentDiv.appendChild(createEl.div('taskListContainer'));
-
+        mainContentDiv.appendChild(createEl.div('taskListContainer'));
+        mainContentDiv.appendChild(generateTaskFormToggle());
     return mainContentDiv;
-}
-
-function generateAddTaskForm() {
-
-    //TODO Need to change date and priority to more accurate input types
-    //TODO Need to validate - can't add something with an identical title and project
-
-
-    const titleBox = createEl.input('formInput', 'text', 'taskTitleInput', 'Title');
-    const dateBox = createEl.input('formInput', 'date', 'taskDateInput', 'Date');
-    const descriptionBox = createEl.input('formInput', 'text', 'taskDescriptionInput', 'Description');
-    const priorityBox = createEl.input('formInput', 'text', 'taskPriorityInput', 'Priority');
-    const projectBox = createEl.input('formInput', 'text', 'taskProjectInput', 'Project');
-
-    const addTaskButton = createEl.div('addTaskButton', 'Add Task')
-    addTaskButton.addEventListener('click', submitAddTaskRequest)
-
-    const formElements = [titleBox, dateBox, descriptionBox, priorityBox, projectBox, addTaskButton];
-
-    const addTaskForm = createEl.div('addTaskForm');
-    formElements.forEach(element => {
-        addTaskForm.appendChild(element);
-    });
-    return addTaskForm;
-}
-
-function submitAddTaskRequest() {
-
-    //TODO Need to check input validation
-    //TODO Need to find a way to add more projects
-    const title = document.querySelector('#taskTitleInput').value;
-    const date = document.querySelector('#taskDateInput').value;
-    const description = document.querySelector('#taskDescriptionInput').value;
-    const priority = document.querySelector('#taskPriorityInput').value;
-    const project = document.querySelector('#taskProjectInput').value;
-
-    addTask(date, title, description, priority, project);
-
-}
+};
 
 (function generatePageBody() {
 

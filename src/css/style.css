@@ -9,7 +9,12 @@
     --halfBlack: rgba(0, 0, 0, 0.5)
 }
 
+body {
+    position: relative;
+}
+
 .bodyContainer {
+    position: relative;
     min-height: 100vh;
     background-color: var(--offWhite);
     display: grid;
@@ -38,18 +43,48 @@
 
 .mainContent {
     grid-area: mainContent;
+    position: relative;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 4fr;
 }
 
+.taskFormToggleDiv {
+    position: fixed;
+    z-index: 100;
+    bottom: 40px;
+    right: 40px;
+    cursor: pointer;
+}
+
+.taskFormToggleDiv>img {
+    width: 100px;
+}
+
+.addTaskFormContainer {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    z-index: 70;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
 .addTaskForm {
-    justify-self: center;
     display: flex;
     flex-direction: column;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 5px 5px var(--halfBlack);
     width: 500px;
-    padding: 10px;
+    padding: 50px;
     gap: 10px;
+}
+
+.closeAddTaskFormIMG {
+    display: none;
 }
 
 .addTaskForm input {
