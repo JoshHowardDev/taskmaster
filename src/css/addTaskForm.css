@@ -1,0 +1,79 @@
+.taskFormToggleDiv {
+    position: fixed;
+    z-index: 100;
+    bottom: 40px;
+    right: 40px;
+    cursor: pointer;
+}
+
+.taskFormToggleDiv>img {
+    width: 100px;
+}
+
+.addTaskFormContainer {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    z-index: 70;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.addTaskForm {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 5px 5px var(--halfBlack);
+    width: 500px;
+    padding: 50px 50px 30px 50px;
+    gap: 20px;
+}
+
+.closeAddTaskFormIMG {
+    display: none;
+}
+
+.addTaskForm input, select {
+    font-size: 1.2rem;
+    border-radius: 10px;
+    padding: 2px 0 2px 10px;
+}
+
+.inputCoupleDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.addTaskFormProjectDiv {
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    gap: 15px;
+}
+
+.addProjectIcon {
+    width: 35px;
+    padding: 5px;
+}
+
+.addTaskButton {
+    cursor: pointer;
+    align-self: center;
+    background-color: var(--darkBlue);
+    color: white;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 12rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.addTaskButton:hover {
+    transition: all 0.3s;
+    scale: 1.2 1.2;
+}

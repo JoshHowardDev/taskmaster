@@ -1,0 +1,59 @@
+
+.taskListContainer {
+    padding: 10px 40px 10px 40px;
+}
+
+.taskListDiv {
+    display: grid;
+    padding: 5px;
+}
+
+.taskListTitleRowDiv, .taskDiv {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: 1fr 2fr 2fr 1fr;
+    margin: 3px;
+}
+
+.taskListTitleRowDiv {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.taskDiv {
+    border-radius: 5px;
+    box-shadow: 0 0 2px 2px var(--halfBlack);
+    padding: 20px 0 20px;
+}
+
+.taskDiv:hover {
+    outline: 2px solid var(--darkBlue);
+}
+
+.taskTitleDiv, .taskProjectDiv {
+    justify-self: start;
+}
+
+.pastDue {
+    background-color: rgb(255, 143, 143);
+}
+
+.taskButtonsDiv {
+    padding-right: 20px;
+    justify-self: end;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.taskButtonsDiv > div {
+    width: 30px;
+}
+
+.taskButtonsDiv>div:hover {
+    cursor: pointer;
+    transition: all 0.1s;
+    filter: saturate(1000%);
+    scale: 1.1 1.1;
+}

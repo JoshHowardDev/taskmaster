@@ -16,8 +16,8 @@ export const generateTaskFormProjectSelectionDiv = () => {
     //Create project select drop down
     const projectSelect = document.createElement('select');
         projectSelect.className = 'addTaskFormProjectSelect';
-        projectSelect.id = 'project';
-        projectSelect.name = 'project';
+        projectSelect.id = 'taskProjectInput';
+        projectSelect.name = 'taskProjectInput';
 
         projectList.forEach(project => {
             const option = document.createElement('option')
@@ -25,6 +25,18 @@ export const generateTaskFormProjectSelectionDiv = () => {
                 option.innerText = project;
             projectSelect.appendChild(option);
         });
+    
+    //Create label for drop down
+    const projectSelectLabel = document.createElement('label')
+        projectSelectLabel.classList.add('inputLabel');
+        projectSelectLabel.for = 'taskProjectInput';
+        projectSelectLabel.innerText = 'Project';
+    
+    //Create couple div for selection and label and
+    const inputCoupleDiv = document.createElement('div');
+        inputCoupleDiv.classList.add('inputCoupleDiv');
+        inputCoupleDiv.appendChild(projectSelectLabel);
+        inputCoupleDiv.appendChild(projectSelect);
 
     //Create add project button
     const addProjectIcon = new Image();
@@ -37,7 +49,7 @@ export const generateTaskFormProjectSelectionDiv = () => {
 
     //Create and return project div container 
     const projectDiv = createEl.div('addTaskFormProjectDiv');
-        projectDiv.appendChild(projectSelect);
+        projectDiv.appendChild(inputCoupleDiv);
         projectDiv.appendChild(addProjectIconDiv);
     return projectDiv;
 }

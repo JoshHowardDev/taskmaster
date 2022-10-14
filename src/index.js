@@ -1,4 +1,6 @@
 import './css/style.css'
+import './css/taskList.css'
+import './css/addTaskForm.css'
 import './css/meyersCSSReset.css'
 import createEl from './utilities.js';
 import { populateTaskList } from './taskLogic.js'
