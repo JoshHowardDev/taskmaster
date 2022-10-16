@@ -1,4 +1,4 @@
-const createEl = {
+export const createEl = {
 
     div(className, innerText) {
         const div = document.createElement('div');
@@ -41,4 +41,4 @@ const createEl = {
 
 };
 
-export {createEl as default};
+//export {createEl as default};

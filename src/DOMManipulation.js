@@ -1,4 +1,4 @@
-import createEl from './utilities.js';
+import { createEl } from './utilities.js';
 import {formatRelative, parseISO, compareAsc} from 'date-fns';
 import deleteIcon from './images/icons/deleteIcon.svg'
 import editIcon from './images/icons/editIcon.svg'

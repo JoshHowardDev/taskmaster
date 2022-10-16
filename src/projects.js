@@ -1,11 +1,11 @@
-import createEl from './utilities.js';
+import { createEl } from './utilities.js';
 import addProjectSVG from './images/icons/plusIcon.svg';
 
 const getProjectsList = () => {
     if (localStorage.getItem('projectsList')) {
         return JSON.parse(localStorage.getItem('projectsList'));
     } else {
-        return ['General', 'Work'];
+        return ['General', 'Daily', 'Work'];
     }
 }
 

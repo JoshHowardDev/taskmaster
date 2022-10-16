@@ -1,4 +1,4 @@
-import createEl from './utilities.js';
+import { createEl } from './utilities.js';
 import { addTask } from './taskLogic.js'
 import { generateTaskFormProjectSelectionDiv } from './projects.js'
 import openAddTaskFormSVG from './images/icons/plusIcon.svg'
@@ -11,14 +11,13 @@ export function generateAddTaskForm() {
 
     const titleBox = createEl.input('formInput', 'text', 'taskTitleInput', 'Title');
     const dateBox = createEl.input('formInput', 'date', 'taskDateInput', 'Date');
-    const descriptionBox = createEl.input('formInput', 'text', 'taskDescriptionInput', 'Description');
-    const priorityBox = createEl.input('formInput', 'text', 'taskPriorityInput', 'Priority');
     const projectDiv = generateTaskFormProjectSelectionDiv();
-
+    const priorityBox = createEl.input('formInput', 'text', 'taskPriorityInput', 'Priority');
+    const descriptionBox = createEl.input('formInput', 'textarea', 'taskDescriptionInput', 'Description');
     const addTaskButton = createEl.div('addTaskButton', 'Add Task')
         addTaskButton.addEventListener('click', submitAddTaskRequest)
 
-    const formElements = [titleBox, dateBox, descriptionBox, priorityBox, projectDiv, addTaskButton];
+    const formElements = [titleBox, dateBox, projectDiv, priorityBox, descriptionBox, addTaskButton];
 
     const addTaskForm = createEl.div('addTaskForm');
     formElements.forEach(element => {
@@ -72,6 +71,7 @@ function openAddTaskForm() {
     document.querySelector('.closeAddTaskFormIMG').style.display = 'block';
     document.querySelector('.taskFormToggleDiv').removeEventListener('click', openAddTaskForm);
     document.querySelector('.taskFormToggleDiv').addEventListener('click', closeAddTaskForm);
+    document.querySelector('.addTaskForm').classList.add('addTaskFormGrow');
 }
 
 function closeAddTaskForm() {
