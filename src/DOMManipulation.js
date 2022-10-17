@@ -1,8 +1,9 @@
-import { createEl } from './utilities.js';
-import {formatRelative, parseISO, compareAsc} from 'date-fns';
 import deleteIcon from './images/icons/deleteIcon.svg'
 import editIcon from './images/icons/editIcon.svg'
+import { createEl } from './utilities.js';
+import {formatRelative, parseISO, compareAsc} from 'date-fns';
 import { deleteTask } from './taskLogic.js';
+import { generateDropDownMenu } from './navMenu.js'
 
 export function publishTaskList(taskList) {
 
@@ -104,4 +105,17 @@ function deleteAttempt(taskId) {
 
 function editAttempt(taskId) {
     alert('Task ID: ' + taskId );
+}
+
+export function toggleDropDownMenu() {
+    const dropDownMenu = document.querySelector('.dropDownMenu');
+    const hamburgerMenuDiv = document.querySelector('.hamburgerMenuDiv');
+
+    if ( dropDownMenu != null) {
+        dropDownMenu.remove()
+        hamburgerMenuDiv.classList.remove('hamburgerMenuExtended')
+    } else {
+        hamburgerMenuDiv.appendChild(generateDropDownMenu());
+        hamburgerMenuDiv.classList.add('hamburgerMenuExtended')
+    }
 }

@@ -1,11 +1,12 @@
-import './css/style.css'
-import './css/taskList.css'
-import './css/addTaskForm.css'
-import './css/meyersCSSReset.css'
+import './css/style.css';
+import './css/taskList.css';
+import './css/addTaskForm.css';
+import './css/navMenu.css';
+import './css/meyersCSSReset.css';
 import { createEl } from './utilities.js';
 import { populateTaskList } from './taskLogic.js'
-import { generateAddTaskForm, generateTaskFormToggle } from './addTaskForm.js'
-import { generateHeader } from './header.js'
+import { generateAddTaskForm, generateTaskFormToggle } from './addTaskForm.js';
+import { generateHeader } from './header.js';
 
 function generateSidebar() {
     const sidebar = createEl.div('sidebar');
