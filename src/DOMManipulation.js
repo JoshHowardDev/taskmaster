@@ -109,13 +109,13 @@ function editAttempt(taskId) {
 
 export function toggleDropDownMenu() {
     const dropDownMenu = document.querySelector('.dropDownMenu');
-    const hamburgerMenuDiv = document.querySelector('.hamburgerMenuDiv');
+    const gridMenuDiv = document.querySelector('.gridMenuDiv');
 
     if ( dropDownMenu != null) {
         dropDownMenu.remove()
-        hamburgerMenuDiv.classList.remove('hamburgerMenuExtended')
+        gridMenuDiv.classList.remove('gridMenuExtended')
     } else {
-        hamburgerMenuDiv.appendChild(generateDropDownMenu());
-        hamburgerMenuDiv.classList.add('hamburgerMenuExtended')
+        gridMenuDiv.appendChild(generateDropDownMenu());
+        gridMenuDiv.classList.add('gridMenuExtended')
     }
 }

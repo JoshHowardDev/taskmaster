@@ -1,13 +1,13 @@
-import hamburgerMenuIcon from './images/icons/hamburger-menu-icon.svg';
+import gridMenuIcon from './images/icons/grid-menu-icon.svg';
 import { createEl } from './utilities.js'
 import { toggleDropDownMenu } from './DOMManipulation.js'
 
-export function generateHamburgerMenuDiv() {
+export function generateGridMenuDiv() {
     const icon = new Image();
-        icon.classList.add('hamburgerMenuIcon');
-        icon.src = hamburgerMenuIcon;
+        icon.classList.add('gridMenuIcon');
+        icon.src = gridMenuIcon;
         icon.alt = 'Menu';
-    const iconDiv = createEl.div('hamburgerMenuDiv');
+    const iconDiv = createEl.div('gridMenuDiv');
         iconDiv.appendChild(icon);
         iconDiv.addEventListener('click', toggleDropDownMenu);
     return iconDiv;       
