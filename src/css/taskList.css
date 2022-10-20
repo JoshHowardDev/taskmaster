@@ -11,7 +11,7 @@
 .taskListTitleRowDiv, .taskDiv {
     display: grid;
     align-items: center;
-    grid-template-columns: 1fr 2fr 2fr 1fr;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
     margin: 3px;
 }
 
@@ -30,8 +30,12 @@
     outline: 2px solid var(--darkBlue);
 }
 
-.taskTitleDiv, .taskProjectDiv {
-    justify-self: start;
+.taskProjectDiv, .taskDateDiv, .taskListColumnTitle-Project, .taskListColumnTitle-Date {
+    text-align: center;
+}
+
+.taskListColumnTitle-Task, .taskTitleDiv {
+    padding-left: 20px;
 }
 
 .pastDue {

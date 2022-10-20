@@ -7,7 +7,7 @@ import { generateDropDownMenu } from './navMenu.js'
 
 export function publishTaskList(taskList) {
 
-    const taskListTitleRow = ['Date', 'Title', 'Project', ''];
+    const taskListTitleRow = ['Task', 'Project', 'Date', ''];
 
     //Create a new, empty taskListDiv
     let taskListDiv = createEl.div('taskListDiv');
@@ -19,7 +19,7 @@ export function publishTaskList(taskList) {
     //Populate and append Title Row
     const taskListTitleRowDiv = createEl.div('taskListTitleRowDiv');
     taskListTitleRow.forEach(element => {    
-        const columnTitle = createEl.div('taskListColumnTitle', element);
+        const columnTitle = createEl.div(`taskListColumnTitle-${element}`, element);
         taskListTitleRowDiv.appendChild(columnTitle);
     });
     taskListDiv.appendChild(taskListTitleRowDiv);
@@ -30,9 +30,9 @@ export function publishTaskList(taskList) {
         const taskDiv = createEl.div('taskDiv');        
             if (dateFuncs.pastDueBool(task.date)) taskDiv.classList.add('pastDue');
             taskDiv.setAttribute('data-taskId', task.id);
-            taskDiv.appendChild(createEl.div('taskDateDiv', dateFuncs.getRelativeDateString(task.date)));
             taskDiv.appendChild(createEl.div('taskTitleDiv', task.title));
             taskDiv.appendChild(createEl.div('taskProjectDiv', task.project));
+            taskDiv.appendChild(createEl.div('taskDateDiv', dateFuncs.getRelativeDateString(task.date)));
             taskDiv.appendChild(taskButtons.createTaskButtonDiv(task.id))
         taskListDiv.appendChild(taskDiv);
     });
