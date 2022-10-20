@@ -10,7 +10,6 @@
 
 .taskListTitleRowDiv, .taskDiv {
     display: grid;
-    justify-items: center;
     align-items: center;
     grid-template-columns: 1fr 2fr 2fr 1fr;
     margin: 3px;

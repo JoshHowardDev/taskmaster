@@ -18,7 +18,7 @@
     transition: all 0.25s;
     position: fixed;
     top: 10px;
-    right: 10px;
+    left: 10px;
     background-color: var(--lightBlue);
     padding: 10px;
     border-radius: 10px;

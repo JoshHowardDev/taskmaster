@@ -5,14 +5,8 @@ import './css/navMenu.css';
 import './css/meyersCSSReset.css';
 import { createEl } from './utilities.js';
 import { populateTaskList } from './taskLogic.js'
-import { generateAddTaskForm, generateTaskFormToggle } from './addTaskForm.js';
-import { generateHeader } from './header.js';
-
-function generateSidebar() {
-    const sidebar = createEl.div('sidebar');
-    sidebar.innerText = 'sidebar';
-    return sidebar;
-}
+import { generateTaskFormToggle } from './addTaskForm.js';
+import { generateSidebar } from './sidebar.js';
 
 function generateMainContent() {
     const mainContentDiv = createEl.div('mainContent');
@@ -23,7 +17,7 @@ function generateMainContent() {
 
 (function generatePageBody() {
 
-    const bodyElements = [generateHeader(), generateSidebar(), generateMainContent()];
+    const bodyElements = [generateSidebar(), generateMainContent()];
 
     const bodyContainer = createEl.div('bodyContainer');
     bodyElements.forEach(element => {
