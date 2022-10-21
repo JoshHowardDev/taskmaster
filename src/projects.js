@@ -1,11 +1,11 @@
 import { createEl } from './utilities.js';
 import addProjectSVG from './images/icons/plusIcon.svg';
 
-const getProjectsList = () => {
+export function getProjectsList() {
     if (localStorage.getItem('projectsList')) {
         return JSON.parse(localStorage.getItem('projectsList'));
     } else {
-        return ['General', 'Daily', 'Work'];
+        return ['General', 'Work'];
     }
 }
 

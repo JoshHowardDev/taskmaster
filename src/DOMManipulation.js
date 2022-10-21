@@ -3,7 +3,6 @@ import editIcon from './images/icons/editIcon.svg'
 import { createEl } from './utilities.js';
 import {formatRelative, parseISO, compareAsc} from 'date-fns';
 import { deleteTask } from './taskLogic.js';
-import { generateDropDownMenu } from './navMenu.js'
 
 export function publishTaskList(taskList) {
 
@@ -105,17 +104,4 @@ function deleteAttempt(taskId) {
 
 function editAttempt(taskId) {
     alert('Task ID: ' + taskId );
-}
-
-export function toggleDropDownMenu() {
-    const dropDownMenu = document.querySelector('.dropDownMenu');
-    const gridMenuDiv = document.querySelector('.gridMenuDiv');
-
-    if ( dropDownMenu != null) {
-        dropDownMenu.remove()
-        gridMenuDiv.classList.remove('gridMenuExtended')
-    } else {
-        gridMenuDiv.appendChild(generateDropDownMenu());
-        gridMenuDiv.classList.add('gridMenuExtended')
-    }
 }

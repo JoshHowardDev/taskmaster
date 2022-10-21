@@ -1,3 +1,7 @@
+:root {
+    --pastDueRed: rgb(255, 143, 143);
+}
+
 
 .taskListContainer {
     padding: 10px 40px 10px 40px;
@@ -39,7 +43,7 @@
 }
 
 .pastDue {
-    background-color: rgb(255, 143, 143);
+    background-color: var(--pastDueRed);
 }
 
 .taskButtonsDiv {
