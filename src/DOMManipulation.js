@@ -2,7 +2,8 @@ import deleteIcon from './images/icons/deleteIcon.svg'
 import editIcon from './images/icons/editIcon.svg'
 import { createEl } from './utilities.js';
 import {formatRelative, parseISO, compareAsc} from 'date-fns';
-import { deleteTask } from './taskLogic.js';
+import { getTaskList, updateTask } from './taskLogic.js';
+import { openAddTaskForm } from './addTaskForm.js';
 
 export function publishTaskList(taskList) {
 
@@ -98,10 +99,17 @@ const taskButtons = (() => {
 function deleteAttempt(taskId) {
     //TODO Make a better looking popup than confirm
     if (confirm('Are you sure you want to delete this task?')) {
-        deleteTask(taskId);
+        updateTask.deleteTask(taskId);
     };
 }
 
 function editAttempt(taskId) {
-    alert('Task ID: ' + taskId );
+    sessionStorage.setItem('currentTaskID', taskId);
+    openAddTaskForm();
+    const task = getTaskList()[taskId]
+    document.querySelector('#taskTitleInput').value = task.title;
+    document.querySelector('#taskDateInput').value = task.date;
+    document.querySelector('#taskProjectInput').value = task.project;
+    document.querySelector('#taskPriorityInput').value = task.priority;
+    document.querySelector('#taskDescriptionInput').value = task.description;
 }

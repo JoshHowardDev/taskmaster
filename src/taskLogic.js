@@ -25,19 +25,11 @@ class Task {
 };
 
 const deleteTask = (taskId) => {
-    const taskList = getTaskList();
-    if (Object.keys(taskList).includes(taskId)) {
-        delete taskList[taskId];
-    } else {
-        console.log(`No task with ID ${taskId} within task list.`);
-        return;
-    }
-    localStorage.setItem('taskList', JSON.stringify(taskList));
-    populateTaskList(taskList);
+
 }
 
 //taskList is an object of Task objects, keys = taskID
-const getTaskList = () => {
+export const getTaskList = () => {
     if (localStorage.getItem('taskList')) {
         return JSON.parse(localStorage.getItem('taskList'));
     } else {
@@ -51,20 +43,41 @@ function compareDate(a, b) {
 }
 
 
-const addTask = (date, title, description, priority, project) => {
+export const updateTask = {
 
+  addTask (date, title, description, priority, project) { 
     const dateForID = new Date();
     const taskId = dateForID.getFullYear().toString() + dateForID.getMonth().toString() + dateForID.getDate().toString() + dateForID.getHours().toString() + dateForID.getMinutes().toString() + dateForID.getSeconds().toString();
-
-    let taskList = getTaskList();
     const newTask = new Task(taskId, date, title, description, priority, project);
+    const taskList = getTaskList();
     taskList[taskId] = newTask;
-
     localStorage.setItem('taskList', JSON.stringify(taskList));
     populateTaskList(taskList);
+  },
+
+  deleteTask(taskId) {
+    const taskList = getTaskList();
+    if (Object.keys(taskList).includes(taskId)) {
+        delete taskList[taskId];
+    } else {
+        console.log(`No task with ID ${taskId} within task list.`);
+        return;
+    }
+    localStorage.setItem('taskList', JSON.stringify(taskList));
+    populateTaskList(taskList);
+  },
+
+  editTask(date, title, description, priority, project, taskId) {
+    const taskList = getTaskList();
+    const newTask = new Task(taskId, date, title, description, priority, project);
+    taskList[taskId] = newTask;
+    localStorage.setItem('taskList', JSON.stringify(taskList));
+    populateTaskList(taskList);
+  },
+
 }
 
-const populateTaskList = (taskList) => {
+export const populateTaskList = (taskList) => {
     if (!taskList) {
         taskList = getTaskList();
     }
@@ -119,6 +132,3 @@ function sortTaskList(taskList) {
 
     return sortedTaskList;
 };
-
-
-export {addTask, deleteTask, populateTaskList};

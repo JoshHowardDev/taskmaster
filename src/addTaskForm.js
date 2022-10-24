@@ -1,5 +1,5 @@
 import { createEl } from './utilities.js';
-import { addTask } from './taskLogic.js'
+import { updateTask, getTaskList } from './taskLogic.js'
 import { generateTaskFormProjectSelectionDiv } from './projects.js'
 import openAddTaskFormSVG from './images/icons/plusIcon.svg'
 import closeAddTaskFormSVG from './images/icons/closeAddTaskForm.svg'
@@ -7,7 +7,6 @@ import closeAddTaskFormSVG from './images/icons/closeAddTaskForm.svg'
 export function generateAddTaskForm() {
 
     //TODO Need to change date and priority to more accurate input types
-    //TODO Need to validate - can't add something with an identical title and project
 
     const titleBox = createEl.input('formInput', 'text', 'taskTitleInput', 'Title');
     const dateBox = createEl.input('formInput', 'date', 'taskDateInput', 'Date');
@@ -15,7 +14,7 @@ export function generateAddTaskForm() {
     const priorityBox = createEl.input('formInput', 'text', 'taskPriorityInput', 'Priority');
     const descriptionBox = createEl.input('formInput', 'textarea', 'taskDescriptionInput', 'Description');
     const addTaskButton = createEl.div('addTaskButton', 'Add Task')
-        addTaskButton.addEventListener('click', submitAddTaskRequest)
+        addTaskButton.addEventListener('click', submitTaskRequest)
 
     const formElements = [titleBox, dateBox, projectDiv, priorityBox, descriptionBox, addTaskButton];
 
@@ -31,19 +30,27 @@ export function generateAddTaskForm() {
 }
 
 
-function submitAddTaskRequest() {
+function submitTaskRequest() {
 
     //TODO Need to check input validation
     //TODO Need to find a way to add more projects
+
+    const taskId = sessionStorage.getItem('currentTaskID');
+    sessionStorage.removeItem('currentTaskID');
+
     const title = document.querySelector('#taskTitleInput').value;
     const date = document.querySelector('#taskDateInput').value;
     const description = document.querySelector('#taskDescriptionInput').value;
     const priority = document.querySelector('#taskPriorityInput').value;
     const project = document.querySelector('#taskProjectInput').value;
 
-    addTask(date, title, description, priority, project);
-    closeAddTaskForm();
 
+  if (taskId) {
+    updateTask.editTask(date, title, description, priority, project, taskId);
+  } else {
+    updateTask.addTask(date, title, description, priority, project);
+  }
+    closeAddTaskForm();
 }
 
 export function generateTaskFormToggle() {
@@ -65,7 +72,7 @@ export function generateTaskFormToggle() {
     return taskFormToggleDiv
 }
 
-function openAddTaskForm() {
+export function openAddTaskForm() {
     document.querySelector('.bodyContainer').appendChild(generateAddTaskForm());
     document.querySelector('.openAddTaskFormIMG').style.display = 'none';
     document.querySelector('.closeAddTaskFormIMG').style.display = 'block';
