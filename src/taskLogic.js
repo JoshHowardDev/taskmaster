@@ -65,8 +65,21 @@ const populateTaskList = (taskList) => {
         taskList = getTaskList();
     }
     taskList = sortTaskList(taskList);
+    taskList = filterTaskList(taskList);
     localStorage.setItem('taskList', JSON.stringify(taskList));
     publishTaskList(getTaskList());
+}
+
+const filterTaskList = (taskList) => {
+  const startDate = sessionStorage.getItem('filterTaskListStartDate');
+  const endDate = sessionStorage.getItem('filterTaskListEndDate');
+
+  if (startDate || endDate) {
+    console.log('filter')
+  }
+
+  return taskList;
+
 }
 
 const sortTaskList = (taskList) => {

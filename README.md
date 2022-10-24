@@ -11,6 +11,7 @@ TODO
         Add option to add time to date
         Integration with google calendar
     TaskList Area
+        Spaces in dates ("LastTuesday")
         Add complete button and functionality
         Add filter options
         Format more modern
