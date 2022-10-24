@@ -1,5 +1,5 @@
 import { publishTaskList } from "./DOMManipulation";
-import {parseISO, compareAsc, parse} from 'date-fns';
+import {parseISO, compareAsc} from 'date-fns';
 
 class Task {
     constructor(id, date, title, description, priority, project) {
@@ -32,9 +32,11 @@ const deleteTask = (taskId) => {
         console.log(`No task with ID ${taskId} within task list.`);
         return;
     }
+    localStorage.setItem('taskList', JSON.stringify(taskList));
     populateTaskList(taskList);
 }
 
+//taskList is an object of Task objects, keys = taskID
 const getTaskList = () => {
     if (localStorage.getItem('taskList')) {
         return JSON.parse(localStorage.getItem('taskList'));
@@ -43,6 +45,7 @@ const getTaskList = () => {
     }
 }
 
+//Returns -1 if a < b, 0 if a=b, or 1 if b > a
 function compareDate(a, b) {
     return compareAsc(parseISO(a[1]), parseISO(b[1]));
 }
@@ -57,6 +60,7 @@ const addTask = (date, title, description, priority, project) => {
     const newTask = new Task(taskId, date, title, description, priority, project);
     taskList[taskId] = newTask;
 
+    localStorage.setItem('taskList', JSON.stringify(taskList));
     populateTaskList(taskList);
 }
 
@@ -64,25 +68,42 @@ const populateTaskList = (taskList) => {
     if (!taskList) {
         taskList = getTaskList();
     }
-    taskList = sortTaskList(taskList);
     taskList = filterTaskList(taskList);
-    localStorage.setItem('taskList', JSON.stringify(taskList));
-    publishTaskList(getTaskList());
+    taskList = sortTaskList(taskList);
+    publishTaskList(taskList);
 }
 
-const filterTaskList = (taskList) => {
-  const startDate = sessionStorage.getItem('filterTaskListStartDate');
-  const endDate = sessionStorage.getItem('filterTaskListEndDate');
+function filterTaskList(taskList) {
 
-  if (startDate || endDate) {
-    console.log('filter')
+  const minDate = new Date(-8640000000000000); //Min date possible in JS
+  const maxDate = new Date(8640000000000000); //Max date possible in JS
+
+  let startDate = sessionStorage.getItem('filterTaskListStartDate')
+    if (startDate) {
+      startDate = new Date(JSON.parse(startDate));
+    } else {
+      startDate = minDate;
+    };
+
+  let endDate = sessionStorage.getItem('filterTaskListEndDate')
+    if (endDate) {
+      endDate = new Date(JSON.parse(endDate));
+    } else {
+      endDate = maxDate;
+    };
+
+  if (compareAsc(startDate, minDate) > 0 || compareAsc(endDate, maxDate) < 0) {
+    Object.keys(taskList).forEach(key => {
+      const date = taskList[key].date
+      if (compareAsc(parseISO(date), startDate) < 0 || compareAsc(parseISO(date), endDate) > 0) {
+        delete taskList[key]
+      }
+    });
   }
-
   return taskList;
-
 }
 
-const sortTaskList = (taskList) => {
+function sortTaskList(taskList) {
 
     const keyAndDateArray = [];
     Object.values(taskList).forEach(obj => {

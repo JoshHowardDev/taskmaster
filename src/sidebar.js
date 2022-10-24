@@ -5,6 +5,7 @@ import calendarIcon from './images/icons/calendar-date.svg';
 import clipboardAlertIcon from './images/icons/clipboard-alert.svg';
 import sunClockIcon from './images/icons/sun-clock.svg';
 import listIcon from './images/icons/list.svg';
+import { populateTaskList } from './taskLogic.js';
 
 
 export function generateEmptySidebar() {
@@ -44,10 +45,10 @@ function toggleSidebar() {
 function extendSidebar() {
 
     const viewOptions = {
-        today: ['Today', sunClockIcon],
-        important: ['Important', clipboardAlertIcon],
-        future: ['Future', calendarIcon],
-        all: ['View All', listIcon],
+        today: ['Today', sunClockIcon, toggleFilterToday],
+        important: ['Important', clipboardAlertIcon, tempFunc],
+        future: ['Future', calendarIcon, tempFunc],
+        all: ['View All', listIcon, tempFunc],
     }
 
     const projects = getProjectsList();
@@ -66,6 +67,7 @@ function extendSidebar() {
             optionDiv.setAttribute('id', `sidebarViewOption${key}`);
             optionDiv.appendChild(iconDiv);
             optionDiv.appendChild(linkDiv);
+            optionDiv.addEventListener('click', viewOptions[key][2]);
         viewOptionsDiv.appendChild(optionDiv);
     });
 
@@ -73,3 +75,20 @@ function extendSidebar() {
         sidebar.appendChild(viewOptionsDiv);
         sidebar.classList.add('sidebarExtended')
 }
+
+function toggleFilterToday() {
+  if (sessionStorage.getItem('todayFilterBool')) {
+    sessionStorage.removeItem('filterTaskListEndDate');
+    sessionStorage.removeItem('todayFilterBool');
+  } else {
+    const today = new Date();
+    const todayStr = JSON.stringify(today);
+    sessionStorage.setItem('filterTaskListEndDate', todayStr);
+    sessionStorage.setItem('todayFilterBool', 'true');
+  };
+  populateTaskList();
+}
+
+function tempFunc() {
+  console.log('This is a temporary function to be changed later.')
+};
