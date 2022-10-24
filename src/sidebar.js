@@ -77,14 +77,17 @@ function extendSidebar() {
 }
 
 function toggleFilterToday() {
-  if (sessionStorage.getItem('todayFilterBool')) {
+
+  const todayLink = document.querySelector('#sidebarViewOptiontoday')
+
+  if (todayLink.classList.contains('sidebarOptionSelected')) {
     sessionStorage.removeItem('filterTaskListEndDate');
-    sessionStorage.removeItem('todayFilterBool');
+    todayLink.classList.remove('sidebarOptionSelected');
   } else {
     const today = new Date();
     const todayStr = JSON.stringify(today);
     sessionStorage.setItem('filterTaskListEndDate', todayStr);
-    sessionStorage.setItem('todayFilterBool', 'true');
+    todayLink.classList.add('sidebarOptionSelected')
   };
   populateTaskList();
 }

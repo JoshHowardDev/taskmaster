@@ -39,7 +39,7 @@
 .sidebarViewOption {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
     font-size: 1.2rem;
     cursor: pointer;
     padding: 4px;
@@ -47,4 +47,13 @@
 
 .sidebarIconDiv>img {
     width: 30px;
+}
+
+.sidebarOptionSelected > .sidebarLinkText {
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.sidebarOptionSelected {
+  border-left: solid 3px black;
 }
