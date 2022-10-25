@@ -15,7 +15,7 @@ body {
 
 .bodyContainer {
     position: relative;
-    background-color: var(--offWhite);
+    background: linear-gradient(var(--darkBlue), var(--lightBlue));
     display: flex;
     font-family: 'Heebo', sans-serif;
 }

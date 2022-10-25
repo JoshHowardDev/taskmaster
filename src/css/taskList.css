@@ -22,16 +22,20 @@
 .taskListTitleRowDiv {
     font-size: 2rem;
     font-weight: 700;
+    color: white;
 }
 
 .taskDiv {
+    background-color: var(--offWhite);
     border-radius: 5px;
     box-shadow: 0 0 2px 2px var(--halfBlack);
     padding: 20px 0 20px;
-}
+} 
 
 .taskDiv:hover {
-    outline: 2px solid var(--darkBlue);
+    /* outline: 2px solid var(--darkBlue); */
+    box-shadow: 0 0 2px 2px white;
+    border: 1px solid black;
 }
 
 .taskProjectDiv, .taskDateDiv, .taskListColumnTitle-Project, .taskListColumnTitle-Date {
