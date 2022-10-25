@@ -10,6 +10,9 @@ export function publishTaskList(taskList) {
 
     const taskListTitleRow = ['', 'Task', 'Project', 'Date', ''];
 
+    const taskListContainer = document.querySelector('.taskListContainer')
+    taskListContainer.classList.remove('emptyTaskList');
+
     //Create a new, empty taskListDiv
     let taskListDiv = createEl.div('taskListDiv');
     if (document.querySelector('.taskListDiv')) {
@@ -45,6 +48,8 @@ export function publishTaskList(taskList) {
                     downArrowIMG.addEventListener('click', toggleTaskExtended.bind(this, task.id));
                   taskDiv.appendChild(downArrowIMG);
                   detailsDiv.appendChild(createEl.div('taskDescriptionDiv', task.description));
+                } else {
+                  taskDiv.appendChild(createEl.div('downArrowIMG'));
                 }
               taskDiv.appendChild(detailsDiv);
               taskDiv.appendChild(createEl.div('taskProjectDiv', task.project));
@@ -55,11 +60,11 @@ export function publishTaskList(taskList) {
 
     //If the taskList is empty
     } else {
-      taskListDiv.classList.add('emptyTaskList');
-      taskListDiv.appendChild(createEl.div('emptyClassNoticeDiv', 'No tasks to show. Click below to add a new task!'));
+      taskListContainer.classList.add('emptyTaskList');
+      taskListDiv.appendChild(createEl.div('emptyClassNoticeDiv', 'No tasks to show at this time.'));
     }
 
-    document.querySelector('.taskListContainer').appendChild(taskListDiv);
+    taskListContainer.appendChild(taskListDiv);
 }
 
 const dateFuncs = (() => {

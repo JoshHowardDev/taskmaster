@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Carme&display=swap');
+
 .taskListContainer {
     padding: 10px 40px 10px 40px;
 }
@@ -51,9 +53,13 @@
   transform: scale(1.1);
 }
 
+.taskDivExtended .downArrowIcon {
+  transform: rotate(180deg);
+}
+
 .taskDivExtended .taskDescriptionDiv {
   display: block;
-  margin: 5px;
+  margin: 10px;
 }
 
 .taskDivExtended .taskTitleDiv {
@@ -93,4 +99,14 @@
     transition: all 0.1s;
     filter: saturate(1000%);
     scale: 1.1 1.1;
+}
+
+.emptyTaskList {
+  min-height: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Carme', sans-serif;
+  font-size: 3rem;
+  color: white;
 }
