@@ -9,8 +9,7 @@ TODO
         Add option to add time to date
         Integration with google calendar
     TaskList Area
-        Remove title row if there are no tasks to show
-          Add background that indicates no tasks
+        Add options to expand all or collapse all
         Spaces in dates ("LastTuesday")
         Add complete button and functionality
         Add filter options

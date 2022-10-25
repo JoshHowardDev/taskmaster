@@ -84,9 +84,9 @@ const dateFuncs = (() => {
         relativeDate = relativeDate.replace('at 12:00 AM', '').trim();
         let relativeDateProper = '';
         relativeDate.toLowerCase().split(' ').forEach(word => {
-            relativeDateProper += word[0].toUpperCase() + word.substring(1);
+            relativeDateProper += word[0].toUpperCase() + word.substring(1) + ' ';
         });
-        return relativeDateProper
+        return relativeDateProper.trim();
     };
 
     return {pastDueBool, getRelativeDateString};
