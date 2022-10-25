@@ -46,10 +46,12 @@ export function publishTaskList(taskList) {
                     downArrowIMG.src = downArrow;
                     downArrowIMG.alt = 'Down Arrow';
                     downArrowIMG.addEventListener('click', toggleTaskExtended.bind(this, task.id));
-                  taskDiv.appendChild(downArrowIMG);
+                  const expandCollapseDiv = createEl.div('expandCollapseDiv');
+                    expandCollapseDiv.appendChild(downArrowIMG);
+                    taskDiv.appendChild(expandCollapseDiv);
                   detailsDiv.appendChild(createEl.div('taskDescriptionDiv', task.description));
                 } else {
-                  taskDiv.appendChild(createEl.div('downArrowIMG'));
+                  taskDiv.appendChild(createEl.div('expandCollapseDiv'));
                 }
               taskDiv.appendChild(detailsDiv);
               taskDiv.appendChild(createEl.div('taskProjectDiv', task.project));

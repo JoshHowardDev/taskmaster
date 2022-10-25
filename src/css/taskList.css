@@ -77,8 +77,18 @@
   padding-left: 40px;
 }
 
-.pastDue {
-    background: linear-gradient(white, white, white, white, white, white, white, white, red)
+.pastDue .expandCollapseDiv {
+  padding: 0;
+  height: calc(100% + 40px);
+  width: max(100%, 40px);
+  background: linear-gradient(90deg, red, var(--offWhite));
+  border-radius: 5px;
+}
+
+.expandCollapseDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .taskButtonsDiv {
