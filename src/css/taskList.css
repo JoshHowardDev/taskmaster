@@ -34,7 +34,7 @@
 }
 
 .taskListColumnTitle-Task, .taskTitleDiv {
-    padding-left: 20px;
+    padding-left: 10px;
 }
 
 .taskDiv:hover {
@@ -74,18 +74,17 @@
 
 .taskDescriptionDiv {
   display: none;
-  padding-left: 40px;
+  padding-left: 20px;
 }
 
 .pastDue .expandCollapseDiv {
-  padding: 0;
   height: calc(100% + 40px);
   width: max(100%, 40px);
-  background: linear-gradient(90deg, red, var(--offWhite));
-  border-radius: 5px;
+  background: linear-gradient(90deg, rgba(255, 0, 0, 0.8), transparent, transparent, transparent);
 }
 
 .expandCollapseDiv {
+  padding-left: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
