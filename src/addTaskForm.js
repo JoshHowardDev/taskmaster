@@ -11,7 +11,11 @@ export function generateAddTaskForm() {
     const titleBox = createEl.input('formInput', 'text', 'taskTitleInput', 'Title');
     const dateBox = createEl.input('formInput', 'date', 'taskDateInput', 'Date');
     const projectDiv = generateTaskFormProjectSelectionDiv();
-    const priorityBox = createEl.input('formInput', 'text', 'taskPriorityInput', 'Priority');
+    const priorityBox = createEl.input('formInput', 'range', 'taskPriorityInput', 'Priority');
+      priorityBox.querySelector('input').setAttribute('value', '3');
+      priorityBox.querySelector('input').setAttribute('min', '1');
+      priorityBox.querySelector('input').setAttribute('max', '5');
+      priorityBox.querySelector('input').setAttribute('step', '1');
     const descriptionBox = createEl.input('formInput', 'textarea', 'taskDescriptionInput', 'Description');
     const addTaskButton = createEl.div('addTaskButton', 'Add Task')
         addTaskButton.addEventListener('click', submitTaskRequest)
