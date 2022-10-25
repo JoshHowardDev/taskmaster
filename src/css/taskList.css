@@ -27,17 +27,38 @@
     padding: 20px 0 20px;
 } 
 
-.taskDiv:hover {
-    box-shadow: 0 0 2px 2px white;
-    border: 1px solid black;
-}
-
 .taskProjectDiv, .taskDateDiv, .taskListColumnTitle-Project, .taskListColumnTitle-Date {
     text-align: center;
 }
 
 .taskListColumnTitle-Task, .taskTitleDiv {
     padding-left: 20px;
+}
+
+.taskDiv:hover {
+  box-shadow: 0 0 2px 2px white;
+  border: 1px solid black;
+}
+
+.taskDiv:hover .taskDescriptionDiv {
+  display: block;
+  margin: 5px;
+}
+
+.taskDiv:hover .taskTitleDiv {
+  font-weight: 700;
+  margin: 5px;
+}
+  
+
+.taskDetailsDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.taskDescriptionDiv {
+  display: none;
+  padding-left: 40px;
 }
 
 .pastDue {

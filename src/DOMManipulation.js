@@ -30,7 +30,12 @@ export function publishTaskList(taskList) {
         const taskDiv = createEl.div('taskDiv');        
             if (dateFuncs.pastDueBool(task.date)) taskDiv.classList.add('pastDue');
             taskDiv.setAttribute('data-taskId', task.id);
-            taskDiv.appendChild(createEl.div('taskTitleDiv', task.title));
+
+            const detailsDiv = createEl.div('taskDetailsDiv');
+              detailsDiv.appendChild(createEl.div('taskTitleDiv', task.title));
+              detailsDiv.appendChild(createEl.div('taskDescriptionDiv', task.description));
+            taskDiv.appendChild(detailsDiv);
+            
             taskDiv.appendChild(createEl.div('taskProjectDiv', task.project));
             taskDiv.appendChild(createEl.div('taskDateDiv', dateFuncs.getRelativeDateString(task.date)));
             taskDiv.appendChild(taskButtons.createTaskButtonDiv(task.id))
