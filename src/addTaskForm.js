@@ -16,7 +16,7 @@ export function generateAddTaskForm() {
       priorityBox.querySelector('input').setAttribute('min', '1');
       priorityBox.querySelector('input').setAttribute('max', '5');
       priorityBox.querySelector('input').setAttribute('step', '1');
-    const descriptionBox = createEl.input('formInput', 'textarea', 'taskDescriptionInput', 'Description');
+    const descriptionBox = generateDescriptionBox();
     const addTaskButton = createEl.div('addTaskButton', 'Add Task')
         addTaskButton.addEventListener('click', submitTaskRequest)
 
@@ -31,6 +31,24 @@ export function generateAddTaskForm() {
         addTaskFormContainer.appendChild(addTaskForm);
 
     return addTaskFormContainer;
+}
+
+function generateDescriptionBox() {
+  const label = document.createElement('label');
+    label.classList.add('inputLabel');
+    label.innerText = 'Description';
+
+  const textArea = document.createElement('textarea');
+    textArea.classList.add('formInput');
+    textArea.id = 'taskDescriptionInput';
+    textArea.name = 'taskDescriptionInput';
+    textArea.rows = '3';
+
+  const descriptionBox = document.createElement('div');
+    descriptionBox.classList.add('inputCoupleDiv');
+    descriptionBox.appendChild(label);
+    descriptionBox.appendChild(textArea);
+  return descriptionBox;
 }
 
 

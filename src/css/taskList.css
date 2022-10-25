@@ -1,8 +1,3 @@
-:root {
-    --pastDueRed: rgb(255, 143, 143);
-}
-
-
 .taskListContainer {
     padding: 10px 40px 10px 40px;
 }
@@ -33,7 +28,6 @@
 } 
 
 .taskDiv:hover {
-    /* outline: 2px solid var(--darkBlue); */
     box-shadow: 0 0 2px 2px white;
     border: 1px solid black;
 }
@@ -47,7 +41,7 @@
 }
 
 .pastDue {
-    background-color: var(--pastDueRed);
+    background: linear-gradient(white, white, white, white, white, white, white, white, red)
 }
 
 .taskButtonsDiv {
