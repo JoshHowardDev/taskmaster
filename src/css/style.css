@@ -21,6 +21,7 @@ body {
 }
 
 .sidebar {
+    box-sizing: border-box;
     min-height: 100vh;
     flex: 0, 1, auto;
     padding: 10px;
