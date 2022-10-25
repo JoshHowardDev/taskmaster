@@ -81,12 +81,18 @@ function toggleFilterToday() {
   const todayLink = document.querySelector('#sidebarViewOptiontoday')
 
   if (todayLink.classList.contains('sidebarOptionSelected')) {
+    sessionStorage.removeItem('filterTaskListStartDate');
     sessionStorage.removeItem('filterTaskListEndDate');
     todayLink.classList.remove('sidebarOptionSelected');
   } else {
-    const today = new Date();
-    const todayStr = JSON.stringify(today);
-    sessionStorage.setItem('filterTaskListEndDate', todayStr);
+    let todayStart = new Date();
+      todayStart.setHours(0, 0, 0, 0);
+      const todayStartStr = JSON.stringify(todayStart);
+    let todayEnd = new Date();
+      todayEnd.setDate(todayEnd.getDate() + 0.99);
+      const todayEndStr = JSON.stringify(todayEnd);
+    sessionStorage.setItem('filterTaskListStartDate', todayStartStr);
+    sessionStorage.setItem('filterTaskListEndDate', todayEndStr);
     todayLink.classList.add('sidebarOptionSelected')
   };
   populateTaskList();
@@ -122,6 +128,7 @@ function toggleFilterFuture() {
 
 function filterViewAll() {
   const todayLink = document.querySelector('#sidebarViewOptiontoday')
+    sessionStorage.removeItem('filterTaskListStartDate');
     sessionStorage.removeItem('filterTaskListEndDate');
     todayLink.classList.remove('sidebarOptionSelected');
 
@@ -130,7 +137,6 @@ function filterViewAll() {
     importantLink.classList.remove('sidebarOptionSelected');
 
   const futureLink = document.querySelector('#sidebarViewOptionfuture')
-    sessionStorage.removeItem('filterTaskListStartDate');
     futureLink.classList.remove('sidebarOptionSelected');    
 
   populateTaskList();

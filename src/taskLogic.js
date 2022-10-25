@@ -24,10 +24,6 @@ class Task {
 
 };
 
-const deleteTask = (taskId) => {
-
-}
-
 //taskList is an object of Task objects, keys = taskID
 export const getTaskList = () => {
     if (localStorage.getItem('taskList')) {
@@ -73,8 +69,7 @@ export const updateTask = {
     taskList[taskId] = newTask;
     localStorage.setItem('taskList', JSON.stringify(taskList));
     populateTaskList(taskList);
-  },
-
+  }
 }
 
 export const populateTaskList = (taskList) => {
@@ -130,7 +125,6 @@ function filterTaskList(taskList) {
 }
 
 function sortTaskList(taskList) {
-
     const keyAndDateArray = [];
     Object.values(taskList).forEach(obj => {
         keyAndDateArray.push([obj.id, obj.date])

@@ -71,7 +71,8 @@ export function publishTaskList(taskList) {
 
 const dateFuncs = (() => {
 
-    const today = new Date();
+    let today = new Date();
+    today.setHours(0, 0, 0, 0);
 
     //Return true if date given is before now
     const pastDueBool = (date) => {
