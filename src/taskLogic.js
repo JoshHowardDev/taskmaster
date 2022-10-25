@@ -88,6 +88,7 @@ export const populateTaskList = (taskList) => {
 
 function filterTaskList(taskList) {
 
+  //Filter by date
   const minDate = new Date(-8640000000000000); //Min date possible in JS
   const maxDate = new Date(8640000000000000); //Max date possible in JS
 
@@ -105,14 +106,26 @@ function filterTaskList(taskList) {
       endDate = maxDate;
     };
 
-  if (compareAsc(startDate, minDate) > 0 || compareAsc(endDate, maxDate) < 0) {
+  //Filter by priority
+  let minimumPriority = sessionStorage.getItem('filterTaskListMinimumPriority');
+    if (minimumPriority) {
+      minimumPriority = Number(minimumPriority);
+    } else {
+      minimumPriority = 0;
+    }
+
+    //Apply filters
     Object.keys(taskList).forEach(key => {
       const date = taskList[key].date
-      if (compareAsc(parseISO(date), startDate) < 0 || compareAsc(parseISO(date), endDate) > 0) {
+      const priority = taskList[key].priority
+      if (compareAsc(parseISO(date), startDate) < 0 || 
+          compareAsc(parseISO(date), endDate) > 0 ||
+          priority < minimumPriority
+      ) {
         delete taskList[key]
       }
     });
-  }
+
   return taskList;
 }
 

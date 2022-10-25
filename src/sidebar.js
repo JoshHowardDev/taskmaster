@@ -46,9 +46,9 @@ function extendSidebar() {
 
     const viewOptions = {
         today: ['Today', sunClockIcon, toggleFilterToday],
-        important: ['Important', clipboardAlertIcon, tempFunc],
-        future: ['Future', calendarIcon, tempFunc],
-        all: ['View All', listIcon, tempFunc],
+        important: ['Important', clipboardAlertIcon, toggleFilterImportant],
+        future: ['Future', calendarIcon, toggleFilterFuture],
+        all: ['View All', listIcon, filterViewAll],
     }
 
     const projects = getProjectsList();
@@ -92,6 +92,46 @@ function toggleFilterToday() {
   populateTaskList();
 }
 
-function tempFunc() {
-  console.log('This is a temporary function to be changed later.')
-};
+function toggleFilterImportant() {
+  const importantLink = document.querySelector('#sidebarViewOptionimportant')
+  if (importantLink.classList.contains('sidebarOptionSelected')) {
+    sessionStorage.removeItem('filterTaskListMinimumPriority');
+    importantLink.classList.remove('sidebarOptionSelected');
+  } else {
+    sessionStorage.setItem('filterTaskListMinimumPriority', '4');
+    importantLink.classList.add('sidebarOptionSelected');
+  };
+  populateTaskList();
+}
+
+function toggleFilterFuture() {
+
+  const futureLink = document.querySelector('#sidebarViewOptionfuture')
+
+  if (futureLink.classList.contains('sidebarOptionSelected')) {
+    sessionStorage.removeItem('filterTaskListStartDate');
+    futureLink.classList.remove('sidebarOptionSelected');
+  } else {
+    const today = new Date();
+    const todayStr = JSON.stringify(today);
+    sessionStorage.setItem('filterTaskListStartDate', todayStr);
+    futureLink.classList.add('sidebarOptionSelected')
+  };
+  populateTaskList();
+}
+
+function filterViewAll() {
+  const todayLink = document.querySelector('#sidebarViewOptiontoday')
+    sessionStorage.removeItem('filterTaskListEndDate');
+    todayLink.classList.remove('sidebarOptionSelected');
+
+  const importantLink = document.querySelector('#sidebarViewOptionimportant')
+    sessionStorage.removeItem('filterTaskListMinimumPriority');
+    importantLink.classList.remove('sidebarOptionSelected');
+
+  const futureLink = document.querySelector('#sidebarViewOptionfuture')
+    sessionStorage.removeItem('filterTaskListStartDate');
+    futureLink.classList.remove('sidebarOptionSelected');    
+
+  populateTaskList();
+}
