@@ -10,7 +10,7 @@
 .taskListTitleRowDiv, .taskDiv {
     display: grid;
     align-items: center;
-    grid-template-columns: 3fr 1fr 1fr 1fr;
+    grid-template-columns: 0.2fr 3fr 1fr 1fr 0.5fr;
     margin: 3px;
 }
 
@@ -40,12 +40,23 @@
   border: 1px solid black;
 }
 
-.taskDiv:hover .taskDescriptionDiv {
+.downArrowIcon {
+  cursor: pointer;
+  width: 30px;
+  padding: 3px;
+}
+
+.downArrowIcon:hover {
+  transition: all 0.2s;
+  transform: scale(1.1);
+}
+
+.taskDivExtended .taskDescriptionDiv {
   display: block;
   margin: 5px;
 }
 
-.taskDiv:hover .taskTitleDiv {
+.taskDivExtended .taskTitleDiv {
   font-weight: 700;
   margin: 5px;
 }

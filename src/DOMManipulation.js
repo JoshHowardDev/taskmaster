@@ -1,5 +1,6 @@
-import deleteIcon from './images/icons/deleteIcon.svg'
-import editIcon from './images/icons/editIcon.svg'
+import deleteIcon from './images/icons/deleteIcon.svg';
+import editIcon from './images/icons/editIcon.svg';
+import downArrow from './images/icons/downArrow.svg';
 import { createEl } from './utilities.js';
 import {formatRelative, parseISO, compareAsc} from 'date-fns';
 import { getTaskList, updateTask } from './taskLogic.js';
@@ -7,7 +8,7 @@ import { openAddTaskForm } from './addTaskForm.js';
 
 export function publishTaskList(taskList) {
 
-    const taskListTitleRow = ['Task', 'Project', 'Date', ''];
+    const taskListTitleRow = ['', 'Task', 'Project', 'Date', ''];
 
     //Create a new, empty taskListDiv
     let taskListDiv = createEl.div('taskListDiv');
@@ -16,31 +17,47 @@ export function publishTaskList(taskList) {
     }
     taskListDiv.innerHTML = ''
 
-    //Populate and append Title Row
-    const taskListTitleRowDiv = createEl.div('taskListTitleRowDiv');
-    taskListTitleRow.forEach(element => {    
-        const columnTitle = createEl.div(`taskListColumnTitle-${element}`, element);
-        taskListTitleRowDiv.appendChild(columnTitle);
-    });
-    taskListDiv.appendChild(taskListTitleRowDiv);
+    //If the taskList is not empty
+    if (Object.values(taskList).length) {
 
-    //Populate and append task rows
-    Object.values(taskList).forEach(task => {
+      //Populate and append Title Row
+      const taskListTitleRowDiv = createEl.div('taskListTitleRowDiv');
+      taskListTitleRow.forEach(element => {    
+          const columnTitle = createEl.div(`taskListColumnTitle-${element}`, element);
+          taskListTitleRowDiv.appendChild(columnTitle);
+      });
+      taskListDiv.appendChild(taskListTitleRowDiv);
 
-        const taskDiv = createEl.div('taskDiv');        
-            if (dateFuncs.pastDueBool(task.date)) taskDiv.classList.add('pastDue');
-            taskDiv.setAttribute('data-taskId', task.id);
+      //Populate and append task rows
+      Object.values(taskList).forEach(task => {
 
-            const detailsDiv = createEl.div('taskDetailsDiv');
-              detailsDiv.appendChild(createEl.div('taskTitleDiv', task.title));
-              detailsDiv.appendChild(createEl.div('taskDescriptionDiv', task.description));
-            taskDiv.appendChild(detailsDiv);
-            
-            taskDiv.appendChild(createEl.div('taskProjectDiv', task.project));
-            taskDiv.appendChild(createEl.div('taskDateDiv', dateFuncs.getRelativeDateString(task.date)));
-            taskDiv.appendChild(taskButtons.createTaskButtonDiv(task.id))
-        taskListDiv.appendChild(taskDiv);
-    });
+          const taskDiv = createEl.div('taskDiv');        
+              if (dateFuncs.pastDueBool(task.date)) taskDiv.classList.add('pastDue');
+              taskDiv.setAttribute('data-taskId', task.id);
+              
+              const detailsDiv = createEl.div('taskDetailsDiv');
+                detailsDiv.appendChild(createEl.div('taskTitleDiv', task.title));
+                if (task.description) {
+                  const downArrowIMG = new Image();
+                    downArrowIMG.classList.add('downArrowIcon')
+                    downArrowIMG.src = downArrow;
+                    downArrowIMG.alt = 'Down Arrow';
+                    downArrowIMG.addEventListener('click', toggleTaskExtended.bind(this, task.id));
+                  taskDiv.appendChild(downArrowIMG);
+                  detailsDiv.appendChild(createEl.div('taskDescriptionDiv', task.description));
+                }
+              taskDiv.appendChild(detailsDiv);
+              taskDiv.appendChild(createEl.div('taskProjectDiv', task.project));
+              taskDiv.appendChild(createEl.div('taskDateDiv', dateFuncs.getRelativeDateString(task.date)));
+              taskDiv.appendChild(taskButtons.createTaskButtonDiv(task.id))
+          taskListDiv.appendChild(taskDiv);
+      });
+
+    //If the taskList is empty
+    } else {
+      taskListDiv.classList.add('emptyTaskList');
+      taskListDiv.appendChild(createEl.div('emptyClassNoticeDiv', 'No tasks to show. Click below to add a new task!'));
+    }
 
     document.querySelector('.taskListContainer').appendChild(taskListDiv);
 }
@@ -117,4 +134,13 @@ function editAttempt(taskId) {
     document.querySelector('#taskProjectInput').value = task.project;
     document.querySelector('#taskPriorityInput').value = task.priority;
     document.querySelector('#taskDescriptionInput').value = task.description;
+}
+
+function toggleTaskExtended(taskId) {
+  const task = document.querySelector(`[data-taskid="${taskId}"]`);
+  if (task.classList.contains('taskDivExtended')) {
+    task.classList.remove('taskDivExtended');
+  } else {
+    task.classList.add('taskDivExtended');
+  };
 }
