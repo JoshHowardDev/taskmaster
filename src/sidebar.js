@@ -1,10 +1,11 @@
-import { createEl } from './utilities.js';
-import { getProjectsList } from './projects.js';
 import gridMenuIcon from './images/icons/grid-menu-icon.svg';
 import calendarIcon from './images/icons/calendar-date.svg';
 import clipboardAlertIcon from './images/icons/clipboard-alert.svg';
 import sunClockIcon from './images/icons/sun-clock.svg';
 import listIcon from './images/icons/list.svg';
+import editIcon from './images/icons/list-edit-icon.svg';
+import { createEl } from './utilities.js';
+import { getProjectsList, openEditProjectForm } from './projects.js';
 import { populateTaskList } from './taskLogic.js';
 
 
@@ -33,9 +34,10 @@ function generateGridMenuDiv() {
     return iconDiv;       
 }
 
-function toggleSidebar() {
+export function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar')
     if (sidebar.classList.contains('sidebarExtended')) {
+        filterViewAll()
         generateEmptySidebar();
     } else {
         extendSidebar();
@@ -43,7 +45,6 @@ function toggleSidebar() {
 }
 
 function extendSidebar() {
-
   const sidebar = document.querySelector('.sidebar');
       sidebar.appendChild(generateViewOptionsDiv());
       sidebar.appendChild(generateProjectsDiv());
@@ -57,8 +58,6 @@ function generateViewOptionsDiv() {
     future: ['Future', calendarIcon, toggleFilterFuture],
     all: ['View All', listIcon, filterViewAll],
   }
-
-  const recurringTaskSets = ['Daily Tasks', 'Weekend Chores'];
 
   const viewOptionsDiv = createEl.div('sidebarViewOptionsDiv');
   Object.keys(viewOptions).forEach((key) => {
@@ -78,7 +77,7 @@ function generateViewOptionsDiv() {
   return viewOptionsDiv;
 }
 
-function generateProjectsDiv() {
+export function generateProjectsDiv() {
   const ul = document.createElement('ul');
     ul.classList.add('sidebarProjectsList');
 
@@ -95,10 +94,20 @@ function generateProjectsDiv() {
   const labelSpan = document.createElement('span');
    labelSpan.classList.add('sidebarProjectLabelSpan');
    labelSpan.innerText = 'Projects';
+  const editIconIMG = new Image();
+    editIconIMG.src = editIcon;
+    editIconIMG.alt = 'Edit';
+    editIconIMG.classList.add('sidebarEditProjectsIcon');
+    editIconIMG.addEventListener('click', openEditProjectForm);
+  const editProjectsIconDiv = createEl.div('sidebarEditProjectsIconDiv')
+    editProjectsIconDiv.appendChild(editIconIMG)
+  const labelDiv = createEl.div('sidebarProjectLabelDiv');
+    labelDiv.appendChild(labelSpan)
+    labelDiv.appendChild(editProjectsIconDiv)
 
 
   const projectsDiv = createEl.div('sidebarProjectsDiv');
-    projectsDiv.appendChild(labelSpan)
+    projectsDiv.appendChild(labelDiv)
     projectsDiv.appendChild(ul)
   return projectsDiv;
 }

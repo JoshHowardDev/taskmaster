@@ -117,8 +117,6 @@ function filterTaskList(taskList) {
       const date = taskList[key].date
       const priority = taskList[key].priority
       const project = taskList[key].project
-      console.log(project)
-      console.log(projectFilter)
       if (compareAsc(parseISO(date), startDate) < 0 || 
           compareAsc(parseISO(date), endDate) > 0 ||
           priority < minimumPriority ||

@@ -1,10 +1,13 @@
-import deleteIcon from './images/icons/deleteIcon.svg';
+import deleteIcon from './images/icons/delete-icon-X.svg';
 import editIcon from './images/icons/editIcon.svg';
 import downArrow from './images/icons/downArrow.svg';
 import { createEl } from './utilities.js';
 import {formatRelative, parseISO, compareAsc} from 'date-fns';
 import { getTaskList, updateTask } from './taskLogic.js';
 import { openAddTaskForm } from './addTaskForm.js';
+import { populateTaskList } from './taskLogic.js';
+import { generateProjectsDiv as generateSidebarProjectsDiv } from './sidebar.js';
+import { generateTaskFormProjectSelectionDiv } from './projects.js'
 
 export function publishTaskList(taskList) {
 
@@ -152,4 +155,28 @@ function toggleTaskExtended(taskId) {
   } else {
     task.classList.add('taskDivExtended');
   };
+}
+
+export function regenerateProjectListsOnDOM() {
+  //If sidebar is extended, close and re-open it (to re-generate projects list)
+  const sidebarExtended = document.querySelector('.sidebarExtended');
+  if (sidebarExtended) {
+    const newSidebarProjectSelectionDiv = generateSidebarProjectsDiv();
+    const oldSidebarProjectSelectionDiv = document.querySelector('.sidebarProjectsDiv');
+    sidebarExtended.replaceChild(newSidebarProjectSelectionDiv, oldSidebarProjectSelectionDiv);
+
+    //If there is a project filter applied to the tasklist, remove it.
+    if (document.querySelector('.sidebarProjectSelected')) {
+      sessionStorage.removeItem('filterTaskListProject');
+      populateTaskList();
+    }
+  }
+
+  //If add task form is open, re-generate project selection div
+  const addTaskForm = document.querySelector('.addTaskForm');
+  if (addTaskForm) {
+    const newProjectSelectionDiv = generateTaskFormProjectSelectionDiv();
+    const oldProjectSelectionDiv = document.querySelector('.addTaskFormProjectDiv');
+    addTaskForm.replaceChild(newProjectSelectionDiv, oldProjectSelectionDiv);
+  }
 }
