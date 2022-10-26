@@ -24,6 +24,11 @@
     width: 100px;
 }
 
+.taskFormToggleDiv:hover {
+  transition: all 0.2s;
+  transform: scale(1.05);
+}
+
 .addTaskFormContainer {
     box-sizing: border-box;
     position: absolute;

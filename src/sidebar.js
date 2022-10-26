@@ -44,36 +44,67 @@ function toggleSidebar() {
 
 function extendSidebar() {
 
-    const viewOptions = {
-        today: ['Today', sunClockIcon, toggleFilterToday],
-        important: ['Important', clipboardAlertIcon, toggleFilterImportant],
-        future: ['Future', calendarIcon, toggleFilterFuture],
-        all: ['View All', listIcon, filterViewAll],
-    }
+  const sidebar = document.querySelector('.sidebar');
+      sidebar.appendChild(generateViewOptionsDiv());
+      sidebar.appendChild(generateProjectsDiv());
+      sidebar.classList.add('sidebarExtended');
+}
 
-    const projects = getProjectsList();
-    const recurringTaskSets = ['Daily Tasks', 'Weekend Chores'];
+function generateViewOptionsDiv() {
+  const viewOptions = {
+    today: ['Today', sunClockIcon, toggleFilterToday],
+    important: ['Important', clipboardAlertIcon, toggleFilterImportant],
+    future: ['Future', calendarIcon, toggleFilterFuture],
+    all: ['View All', listIcon, filterViewAll],
+  }
 
-    const viewOptionsDiv = createEl.div('sidebarViewOptionsDiv');
-    Object.keys(viewOptions).forEach((key) => {
+  const recurringTaskSets = ['Daily Tasks', 'Weekend Chores'];
 
-        const icon = new Image();
-            icon.src = viewOptions[key][1];
-            icon.alt = viewOptions[key][0];
-        const iconDiv = createEl.div('sidebarIconDiv');
-            iconDiv.appendChild(icon);
-        const linkDiv = createEl.div('sidebarLinkText', viewOptions[key][0]);
-        const optionDiv = createEl.div('sidebarViewOption');
-            optionDiv.setAttribute('id', `sidebarViewOption${key}`);
-            optionDiv.appendChild(iconDiv);
-            optionDiv.appendChild(linkDiv);
-            optionDiv.addEventListener('click', viewOptions[key][2]);
-        viewOptionsDiv.appendChild(optionDiv);
-    });
+  const viewOptionsDiv = createEl.div('sidebarViewOptionsDiv');
+  Object.keys(viewOptions).forEach((key) => {
+    const icon = new Image();
+        icon.src = viewOptions[key][1];
+        icon.alt = viewOptions[key][0];
+    const iconDiv = createEl.div('sidebarIconDiv');
+        iconDiv.appendChild(icon);
+    const linkDiv = createEl.div('sidebarLinkText', viewOptions[key][0]);
+    const optionDiv = createEl.div('sidebarViewOption');
+        optionDiv.setAttribute('id', `sidebarViewOption${key}`);
+        optionDiv.appendChild(iconDiv);
+        optionDiv.appendChild(linkDiv);
+        optionDiv.addEventListener('click', viewOptions[key][2]);
+    viewOptionsDiv.appendChild(optionDiv);
+  });
+  return viewOptionsDiv;
+}
 
-    const sidebar = document.querySelector('.sidebar')
-        sidebar.appendChild(viewOptionsDiv);
-        sidebar.classList.add('sidebarExtended')
+function generateProjectsDiv() {
+  const ul = document.createElement('ul');
+    ul.classList.add('sidebarProjectsList');
+
+  const projects = getProjectsList();
+  projects.forEach(project => {
+    const li = document.createElement('li');
+      li.classList.add('sidebarProject');
+      li.classList.add(`sidebarProject${project}`);
+      li.innerText = `${project}`;
+      li.addEventListener('click', tempFunc.bind(this, project));
+    ul.appendChild(li);
+  });
+  
+  const labelSpan = document.createElement('span');
+   labelSpan.classList.add('sidebarProjectLabelSpan');
+   labelSpan.innerText = 'Projects';
+
+
+  const projectsDiv = createEl.div('sidebarProjectsDiv');
+    projectsDiv.appendChild(labelSpan)
+    projectsDiv.appendChild(ul)
+  return projectsDiv;
+}
+
+function tempFunc() {
+  console.log('This is a temporary function that needs to be replaced.')
 }
 
 function toggleFilterToday() {

@@ -1,6 +1,7 @@
 import { createEl } from './utilities.js';
 import addProjectSVG from './images/icons/plusIcon.svg';
 
+//Projects list is an array of strings
 export function getProjectsList() {
     if (localStorage.getItem('projectsList')) {
         return JSON.parse(localStorage.getItem('projectsList'));
