@@ -5,11 +5,12 @@ import openAddTaskFormSVG from './images/icons/plusIcon.svg'
 import closeAddTaskFormSVG from './images/icons/closeAddTaskForm.svg'
 
 export function generateAddTaskForm() {
-
-    //TODO Need to change date and priority to more accurate input types
-
     const titleBox = createEl.input('formInput', 'text', 'taskTitleInput', 'Title');
     const dateBox = createEl.input('formInput', 'date', 'taskDateInput', 'Date');
+      let defaultDate = new Date();
+      defaultDate.setHours(0, 0, 0, 0)
+      defaultDate = defaultDate.getFullYear() + '-' + (defaultDate.getMonth() + 1).toString().padStart(2, '0') + '-' + defaultDate.getDate().toString().padStart(2, '0');
+      dateBox.querySelector('input').defaultValue = defaultDate;
     const projectDiv = generateTaskFormProjectSelectionDiv();
     const priorityBox = createEl.input('formInput', 'range', 'taskPriorityInput', 'Priority');
       priorityBox.querySelector('input').setAttribute('value', '3');

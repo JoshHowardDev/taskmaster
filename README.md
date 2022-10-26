@@ -4,7 +4,6 @@ To-Do List Project for The Odin Project
 
 Potential Flex Features
   General
-      Layout of AddTaskForm
       Add option to add time to date
       Integration with google calendar
   TaskList Area
