@@ -40,20 +40,21 @@ export function publishTaskList(taskList) {
               
               const detailsDiv = createEl.div('taskDetailsDiv');
                 detailsDiv.appendChild(createEl.div('taskTitleDiv', task.title));
+                const downArrowIMG = new Image();
+                  downArrowIMG.classList.add('downArrowIcon')
+                  downArrowIMG.src = downArrow;
+                  downArrowIMG.alt = 'Down Arrow';
+                  downArrowIMG.addEventListener('click', toggleTaskExtended.bind(this, task.id));
+                const expandCollapseDiv = createEl.div('expandCollapseDiv');
+                  expandCollapseDiv.appendChild(downArrowIMG);
+                  taskDiv.appendChild(expandCollapseDiv);
                 if (task.description) {
-                  const downArrowIMG = new Image();
-                    downArrowIMG.classList.add('downArrowIcon')
-                    downArrowIMG.src = downArrow;
-                    downArrowIMG.alt = 'Down Arrow';
-                    downArrowIMG.addEventListener('click', toggleTaskExtended.bind(this, task.id));
-                  const expandCollapseDiv = createEl.div('expandCollapseDiv');
-                    expandCollapseDiv.appendChild(downArrowIMG);
-                    taskDiv.appendChild(expandCollapseDiv);
                   detailsDiv.appendChild(createEl.div('taskDescriptionDiv', task.description));
                 } else {
-                  taskDiv.appendChild(createEl.div('expandCollapseDiv'));
+                  detailsDiv.appendChild(createEl.div('taskDescriptionDiv', 'No Description'));
                 }
               taskDiv.appendChild(detailsDiv);
+              
               taskDiv.appendChild(createEl.div('taskProjectDiv', task.project));
               taskDiv.appendChild(createEl.div('taskDateDiv', dateFuncs.getRelativeDateString(task.date)));
               taskDiv.appendChild(taskButtons.createTaskButtonDiv(task.id))
