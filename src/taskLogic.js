@@ -109,13 +109,20 @@ function filterTaskList(taskList) {
       minimumPriority = 0;
     }
 
+  //Filter by project
+  let projectFilter = sessionStorage.getItem('filterTaskListProject');
+
     //Apply filters
     Object.keys(taskList).forEach(key => {
       const date = taskList[key].date
       const priority = taskList[key].priority
+      const project = taskList[key].project
+      console.log(project)
+      console.log(projectFilter)
       if (compareAsc(parseISO(date), startDate) < 0 || 
           compareAsc(parseISO(date), endDate) > 0 ||
-          priority < minimumPriority
+          priority < minimumPriority ||
+          projectFilter && projectFilter != project
       ) {
         delete taskList[key]
       }

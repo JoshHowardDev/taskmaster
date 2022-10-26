@@ -88,7 +88,7 @@ function generateProjectsDiv() {
       li.classList.add('sidebarProject');
       li.classList.add(`sidebarProject${project}`);
       li.innerText = `${project}`;
-      li.addEventListener('click', tempFunc.bind(this, project));
+      li.addEventListener('click', toggleProjectFilter.bind(this, project));
     ul.appendChild(li);
   });
   
@@ -103,8 +103,23 @@ function generateProjectsDiv() {
   return projectsDiv;
 }
 
-function tempFunc() {
-  console.log('This is a temporary function that needs to be replaced.')
+function toggleProjectFilter(project) {
+  const projectLink = document.querySelector(`.sidebarProject${project}`);
+  if (projectLink.classList.contains('sidebarProjectSelected')) {
+    projectLink.classList.remove('sidebarProjectSelected')
+    sessionStorage.removeItem('filterTaskListProject');
+  } else {
+    //Remove all project selections
+    const projectList = getProjectsList();
+    projectList.forEach(projectStr => {
+      const projectDiv = document.querySelector(`.sidebarProject${projectStr}`)
+      projectDiv.classList.remove('sidebarProjectSelected')
+    });
+
+    sessionStorage.setItem('filterTaskListProject', project);
+    projectLink.classList.add('sidebarProjectSelected')
+  };
+  populateTaskList();
 }
 
 function toggleFilterToday() {
@@ -169,6 +184,14 @@ function filterViewAll() {
 
   const futureLink = document.querySelector('#sidebarViewOptionfuture')
     futureLink.classList.remove('sidebarOptionSelected');    
+
+  //Remove all project selections
+  sessionStorage.removeItem('filterTaskListProject');
+  const projectList = getProjectsList();
+  projectList.forEach(projectStr => {
+    const projectDiv = document.querySelector(`.sidebarProject${projectStr}`)
+    projectDiv.classList.remove('sidebarProjectSelected')
+  });    
 
   populateTaskList();
 }
